@@ -1,0 +1,62 @@
+<div class="row">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Todo List</h4>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="bg-light p-3">
+							<label>Your Todo List Type Here</label>
+							<input type="text" class="todo-input form-control mb-0" placeholder="Type Your To do List Here" [(ngModel)]="todoTitle" (keyup.enter)="addTodoList()">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="bg-light p-3 border-top scrollable" style="height: 180px;"  [perfectScrollbar]="config">
+							<div class="todo-item mb-3 d-flex align-items-center justify-content-between border-bottom pb-3" *ngFor="let todo of todosFiltered()" @fade>
+								<div class="todo-item-left d-flex align-items-center">
+									<input type="checkbox" [(ngModel)]="todo.completed" (change)="doneEditList(todo)">
+									<div *ngIf="!todo.editing; else editingTodo" class="todo-item-label p-2 border ml-3" [ngClass]="{ 'completed' : todo.completed }" (dblclick)="editTodoList(todo)">{{ todo.title }}</div>
+									<ng-template #editingTodo>
+									<input type="text" class="todo-item-edit rounded-pill ml-2 form-control" [(ngModel)]="todo.title" (blur)="doneEditList(todo)" (keyup.enter)="doneEditList(todo)" (keyup.esc)="cancelEditList(todo)"autofocus>
+									</ng-template>
+								</div>
+								<div class="remove-item ml-3" (click)="deleteTodoList(todo.id)">
+									<i class="mdi mdi-backspace text-danger font-20 font-medium"></i>
+								</div>
+							</div>
+						</div>
+						<div class="d-flex align-items-center justify-content-between font-16 bg-info text-white py-2 px-3">
+							<div>
+								<label class="mb-0">
+									<input type="checkbox" (change)="checkAllTodos()"  [(ngModel)]="!anyRemainingModel"> Mark All
+								</label>
+							</div>
+							<div>{{ remainingList() }} Tasks left</div>
+						</div>
+						<div class="d-flex align-items-center justify-content-between font-16 p-3 bg-light">
+							<div>
+								<button class="btn btn-info" [ngClass]="{'active': filter === 'all'}" (click)="filter='all'">
+								<i class="mdi mdi-format-list-numbers mr-1"></i>
+								<span>All</span>
+								</button>
+								<button class="btn btn-success" [ngClass]="{'active': filter === 'active'}" (click)="filter='active'">
+								<i class="mdi mdi-toggle-switch mr-1"></i>
+								<span>Active</span>
+								</button>
+								<button class="btn btn-danger" [ngClass]="{'active': filter === 'completed'}" (click)="filter='completed'">
+								<i class="mdi mdi-playlist-check mr-1"></i>
+								<span>Completed</span>
+								</button>
+							</div>
+							<div *ngIf="atLeastOneCompleted()">
+								<button (click)="clearCompleted()" class="btn btn-primary"><i class="mdi mdi-playlist-remove mr-1"></i> Clear Completed</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,25 @@
+.todo-item {
+  animation-duration: 0.3s;
+}
+
+.remove-item {
+  cursor: pointer;
+}
+
+.todo-item-edit {
+  font-size: 17px;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: grey;
+}
+
+// CSS Transitions
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}

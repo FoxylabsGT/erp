@@ -1,0 +1,178 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <!-- Column -->
+          <div class="col-md-6 col-lg-3 col-xlg-3">
+            <div class="card card-hover">
+              <div class="box bg-info text-center">
+                <h1 class="font-light text-white">{{ tickets.length }}</h1>
+                <h6 class="text-white">Total Tickets</h6>
+              </div>
+            </div>
+          </div>
+          <!-- Column -->
+          <div class="col-md-6 col-lg-3 col-xlg-3">
+            <div class="card card-hover">
+              <div class="box bg-warning text-center">
+                <h1 class="font-light text-white">3</h1>
+                <h6 class="text-white">In Progress</h6>
+              </div>
+            </div>
+          </div>
+          <!-- Column -->
+          <div class="col-md-6 col-lg-3 col-xlg-3">
+            <div class="card card-hover">
+              <div class="box bg-success text-center">
+                <h1 class="font-light text-white">3</h1>
+                <h6 class="text-white">Open</h6>
+              </div>
+            </div>
+          </div>
+          <!-- Column -->
+          <div class="col-md-6 col-lg-3 col-xlg-3">
+            <div class="card card-hover">
+              <div class="box bg-danger text-center">
+                <h1 class="font-light text-white">4</h1>
+                <h6 class="text-white">Closed</h6>
+              </div>
+            </div>
+          </div>
+          <!-- Column -->
+        </div>
+        <div class="row mb-4">
+          <div class="col-md-6 col-lg-3 col-xl-2">
+            <input type="text" class="form-control form-control-lg" type="text" name="search" [(ngModel)]="searchText"
+              autocomplete="off" placeholder="Search here...">
+          </div>
+          <div class="col-md-6 col-lg-9 col-xl-10 text-md-right mt-4 mt-md-0">
+            <button class="btn btn-lg btn-cyan text-white" (click)="open(addTaskModal)">
+              <i class="fa fa-plus-square mr-2"></i>Add Ticket</button>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered mb-0 no-wrap">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Created by</th>
+                <th>Title</th>
+                <th>Assignee</th>
+                <th>Status</th>
+                <th>Product</th>
+                <th>Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody *ngIf='tickets && tickets.length'>
+              <tr *ngFor="let ticket of tickets | filter:searchText; let i = index">
+                <td>
+                  <a [routerLink]="['/apps/ticketdetails']" class="font-bold link">{{ ticket.id }}</a>
+                </td>
+                <td>{{ ticket.creator }}</td>
+                <td>
+                  <a [routerLink]="['/apps/ticketdetails']" class="font-medium link">{{ ticket.title }}</a>
+                </td>
+                <td>
+                  {{ ticket.assignee }}
+                </td>
+                <td>
+                  <span class="label label-{{ ticket.labelbg }}">{{ ticket.status }}</span>
+                </td>
+                <td>{{ ticket.product }}</td>
+                <td>{{ ticket.date }}</td>
+                <td>
+                  <a [routerLink]="['/apps/ticketdetails']" class="link mr-2" placement="top" ngbTooltip="Edit">
+                    <i class="mdi mdi-pencil"></i>
+                  </a>
+                  <a href="javascript: void(0);" class="link" (click)="tickets.splice(i, 1)" placement="top"
+                    ngbTooltip="Delete">
+                    <i class="mdi mdi-delete"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #addTaskModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add Task</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="tickt">
+      <div class="form-group" [ngClass]="{'has-error':formsErrors.id}">
+        <label for="id">ID</label>
+        <input type="text" class="form-control" required id="id" formControlName="id"
+          (blur)='logValidationErrors(tickt)'>
+        <span class="help-block text-danger font-14" *ngIf="formsErrors.id">
+          {{formsErrors.id}}
+        </span>
+      </div>
+      <div class="form-group" [ngClass]="{'has-error':formsErrors.creator}">
+        <label for="creator">Created By</label>
+        <input type="text" class="form-control" required id="creator" formControlName="creator"
+          (blur)='logValidationErrors(tickt)'>
+        <span class="help-block text-danger font-14" *ngIf="formsErrors.creator">
+          {{formsErrors.creator}}
+        </span>
+      </div>
+      <div class="form-group" [ngClass]="{'has-error':formsErrors.title}">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" required id="title" formControlName="title"
+          (blur)='logValidationErrors(tickt)'>
+        <span class="help-block text-danger font-14" *ngIf="formsErrors.title">
+          {{formsErrors.title}}
+        </span>
+      </div>
+      <div class="form-group" [ngClass]="{'has-error':formsErrors.assignee}">
+        <label for="title">Assignee</label>
+        <input type="text" class="form-control" required id="assignee" formControlName="assignee"
+          (blur)='logValidationErrors(tickt)'>
+        <span class="help-block text-danger font-14" *ngIf="formsErrors.assignee">
+          {{formsErrors.assignee}}
+        </span>
+      </div>
+      <div class="form-group" [ngClass]="{'has-error':formsErrors.status}">
+        <label for="status">Status</label>
+        <select class="custom-select" required id="status" formControlName="status" (blur)='logValidationErrors(tickt)'>
+          <option value="In Progress">In Progress</option>
+          <option value="Open">Open</option>
+          <option value="Closed">Closed</option>
+        </select>
+        <span class="help-block text-danger font-14" *ngIf="formsErrors.status">
+          {{formsErrors.status}}
+        </span>
+      </div>
+      <div class="form-group" [ngClass]="{'has-error':formsErrors.product}">
+        <label for="product">Product</label>
+        <input type="text" class="form-control" required id="product" formControlName="product"
+          (blur)='logValidationErrors(tickt)'>
+        <span class="help-block text-danger font-14" *ngIf="formsErrors.product">
+          {{formsErrors.product}}
+        </span>
+      </div>
+      <div class="form-group" [ngClass]="{'has-error':formsErrors.date}">
+        <label for="date">Date</label>
+        <input type="date" class="form-control" required id="date" formControlName="date"
+          (blur)='logValidationErrors(tickt)'>
+        <span class="help-block text-danger font-14" *ngIf="formsErrors.date">
+          {{formsErrors.date}}
+        </span>
+      </div>
+      <div class="form-group">
+        <button type="submit" [disabled]="tickt.invalid" (click)="addTicket(); modal.dismiss('Cross click');"
+          class="btn btn-outline-dark">Add
+          Ticket</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
