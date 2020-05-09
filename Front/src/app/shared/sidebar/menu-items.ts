@@ -21,48 +21,8 @@ export const ROUTES: RouteInfo[] = [
 		extralink: false,
 		submenu: [
 			{
-				path: '/Categorias/Categorias',
-				title: 'Categorias',
-				icon: 'mdi mdi-adjust',
-				class: '',
-				label: '',
-				labelClass: '',
-				extralink: false,
-				submenu: []
-			},
-			{
-				path: '/Categorias/Productos',
-				title: 'Productos',
-				icon: 'mdi mdi-adjust',
-				class: '',
-				label: '',
-				labelClass: '',
-				extralink: false,
-				submenu: []
-			},
-			{
-				path: '/Categorias/Producto',
-				title: 'Producto',
-				icon: 'mdi mdi-adjust',
-				class: '',
-				label: '',
-				labelClass: '',
-				extralink: false,
-				submenu: []
-			},
-			{
-				path: '/Categorias/Carrito',
-				title: 'Carrito',
-				icon: 'mdi mdi-adjust',
-				class: '',
-				label: '',
-				labelClass: '',
-				extralink: false,
-				submenu: []
-			},
-			{
-				path: '/Usuarios/Usuarios',
-				title: 'Pedidos Asignados',
+				path: '/Usuarios/UsuariosPedidos',
+				title: 'Pedidos con tabs',
 				icon: 'mdi mdi-adjust',
 				class: '',
 				label: '',

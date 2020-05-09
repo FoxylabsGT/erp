@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-lg-12" *ngFor="let T of PedidosProcesando">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table v-middle product-overview" id="zero_config">
+                        <thead>
+                            <tr>
+                                <th>Imagen</th>
+                                <th>Descripcion</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <img src="{{T.taxis_mandados_imagen}}" fallimg alt="iMac" width="80"> </td>
+                                <textarea name="" id="" cols="80" rows="9" readonly>{{T.taxis_mandados_descripcion}}
+                                </textarea>
+                                <td>
+                                    <button (click)="getItems(T); CambioEstadoto3();" type="button" class="btn btn-secondary">Siguiente</button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

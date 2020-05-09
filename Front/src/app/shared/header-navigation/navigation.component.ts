@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, EventEmitter, Output } from '@angular/core';
+import { Component, AfterViewInit, EventEmitter, Output, OnInit } from '@angular/core';
 import {
   NgbModal,
   ModalDismissReasons,
@@ -6,20 +6,23 @@ import {
   NgbCarouselConfig
 } from '@ng-bootstrap/ng-bootstrap';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { DataService } from '../../data.service';
+import { Login } from '../../../models/usuarios.model';
+import { Router } from '@angular/router';
 declare var $: any;
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html'
 })
-export class NavigationComponent implements AfterViewInit {
+export class NavigationComponent implements AfterViewInit, OnInit {
   @Output() toggleSidebar = new EventEmitter<void>();
-
+  
   public config: PerfectScrollbarConfigInterface = {};
 
   public showSearch = false;
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal, private dataService: DataService, private router: Router) {}
 
   // This is for Notifications
   notifications: Object[] = [
@@ -84,6 +87,27 @@ export class NavigationComponent implements AfterViewInit {
       time: '9:00 AM'
     }
   ];
+  clearStorage(){
+		console.log("se ha deslogueado")
+		localStorage.removeItem('UsuarioID');
+    localStorage.clear();
+	  }
+  obtenerUsuario(id:number){
+   return this.dataService.getUsuarios(id) 
+      .subscribe(data => {
+        this.Login$ = data;
+      });
+  }
+	goToPage(pageName:string){
+		this.router.navigate([`${pageName}`]);
+	  }
 
-  ngAfterViewInit() {}
+  Login$: any;
+  ngAfterViewInit() {
+
+  }
+  ngOnInit(){
+    const UsuarioID = localStorage.getItem('UsuarioID') as string;
+    this.obtenerUsuario(Number(JSON.parse(UsuarioID)));
+  }
 }

@@ -24,16 +24,8 @@ export const AuthenticationRoutes: Routes = [
         component: LoginComponent
       },
       {
-        path: 'login2',
-        component: Login2Component
-      },
-      {
         path: 'signup',
         component: SignupComponent
-      },
-      {
-        path: 'signup2',
-        component: Signup2Component
       }
     ]
   }

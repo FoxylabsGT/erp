@@ -45,7 +45,7 @@ export class NgbdModalBasicComponent {
 	}
 
 	openVerticallyCentered(content3) {
-		this.modalService.open(content3, { centered: true });
+		this.modalService.open(content3, { centered: true, size: 'lg' });
 	}
 
 	openstackmodal(contentstack) {

@@ -25,6 +25,7 @@ import { CardsComponent } from './card/card.component';
 import { NotifierComponent } from './notifier/notifier.component';
 import { ToastComponent } from './toast/toast.component';
 import { ToastsContainer } from './toast/toast-container';
+import { NgFallimgModule } from 'ng-fallimg';
 
 @NgModule({
   imports: [
@@ -33,7 +34,10 @@ import { ToastsContainer } from './toast/toast-container';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    NotifierModule
+    NotifierModule,
+    NgFallimgModule.forRoot({
+      default: '../../assets/images/gallery/IMGNotFound.jpg',
+    })
   ],
   declarations: [
     NgbdpregressbarBasicComponent,

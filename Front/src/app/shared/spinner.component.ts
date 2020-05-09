@@ -13,7 +13,10 @@ import {
   NavigationError
 } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
-
+import { NgFallimgModule } from 'ng-fallimg';
+NgFallimgModule.forRoot({
+  default: '../../assets/images/gallery/IMGNotFound.jpg',
+})
 @Component({
   selector: 'app-spinner',
   template: `<div class="preloader" *ngIf="isSpinnerVisible">
@@ -25,6 +28,7 @@ import { DOCUMENT } from '@angular/common';
   encapsulation: ViewEncapsulation.None
 })
 export class SpinnerComponent implements OnDestroy {
+  
   public isSpinnerVisible = true;
 
   @Input() public backgroundColor = 'rgba(0, 115, 170, 0.69)';

@@ -14,7 +14,7 @@ export const Approutes: Routes = [
 			{ path: 'Categorias', loadChildren: () => import('./Categorias/categorias.module').then(m => m.CategoriasModule) },
 //--------------------------------------------------------------------------------------------------------------------------------------------
 
-			{ path: '', redirectTo: '/Categorias/Categorias', pathMatch: 'full' },
+			{ path: '', redirectTo: '/authentication/login', pathMatch: 'full' },
 			{
 				path: 'starter',
 				loadChildren: () => import('./starter/starter.module').then(m => m.StarterModule)

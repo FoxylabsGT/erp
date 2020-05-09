@@ -9,6 +9,7 @@ import { DragulaModule } from 'ng2-dragula';
 import { QuillModule } from 'ngx-quill';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { NgFallimgModule } from 'ng-fallimg';
 
 import { AppsRoutes } from './apps.routing';
 import { ChatComponent } from './chat/chat.component';
@@ -31,7 +32,10 @@ import { ContactComponent } from './contact/contact.component';
         DragulaModule.forRoot(),
         RouterModule.forChild(AppsRoutes),
         PerfectScrollbarModule,
-        Ng2SearchPipeModule
+        Ng2SearchPipeModule,
+        NgFallimgModule.forRoot({
+            default: '../../assets/images/gallery/IMGNotFound.jpg',
+          })
     ],
     declarations: [
         ChatComponent,
